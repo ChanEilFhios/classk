@@ -11,7 +11,7 @@ export const createElem = (classes = [], tag = "div", id = '') => {
 }
 
 export const createContainerElem = (classes = [], children = [], id = '') => {
-    const newEl = createElem(classes, tag, id)
+    const newEl = createElem(classes, "div", id)
 
     newEl.replaceChildren(...children)
 
