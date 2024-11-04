@@ -2,28 +2,6 @@ import {renderPane} from './renderutils.js'
 
 let renderElement
 const routes = {}
-let notFoundPane
-
-export default (parentElement, homePage, notFoundPage, startingRoutes) => {
-    if (!parentElement) {
-        throw new Error("No parent element provided.")
-    }
-    if (!homePage) {
-        throw new Error("No home page DOM renderer provided.")
-    }
-
-    renderElement = parentElement
-    routes["/"] = homePage
-    notFoundPane = notFoundPage
-    if (startingRoutes) addRoutes(startingRoutes)
-
-    //Handle the back and forward buttons
-    window.onload = () => navigate(window.location.pathname)
-    window.onpopstate = () => navigate(window.location.pathname)
-    
-    //Render the current route
-    navigate(window.location.pathname)
-}
 
 export const addRoutes = (newRoutes) => {
     if (!newRoutes) {
@@ -35,16 +13,21 @@ export const addRoutes = (newRoutes) => {
     })
 }
 
+const handleRoute = () => {
+    const hash = window.location.hash.slice(1)
+    console.log("Handling Route:", hash)
+    const matchingRoute = routes[hash] || routes["*"]
+
+    if (matchingRoute) {
+        renderPane(renderElement, matchingRoute)
+    } else console.log("Received unknown route:", hash)
+}
+
 export const navigate = (url) => {
-    if (!url) {
-        throw new Error("No URL provided.")
-    }
-
-    if (!routes[url]) {
-        renderPane(renderElement, notFoundPane)
-    }
-
-    renderPane(renderElement, routes[url])
+    const hash = path ? `#${path}` : '';
+    
+    window.location.hash = url
+    handleRoute()
 }
 
 export const linkify = (linkElement) => {
@@ -52,4 +35,23 @@ export const linkify = (linkElement) => {
         e.preventDefault()
         navigate(linkElement.getAttribute("href"))
     })
+}
+
+export default (parentElement, homePage, notFoundPage, startingRoutes) => {
+    if (!parentElement) {
+        throw new Error("No parent element provided.")
+    }
+    if (!homePage) {
+        throw new Error("No home page DOM renderer provided.")
+    }
+
+    renderElement = parentElement
+    routes["/"] = homePage
+    routes['*'] = notFoundPage
+    if (startingRoutes) addRoutes(startingRoutes)
+
+    window.addEventListener('hashchange', handleRoute);
+    
+    //Render the current route
+    handleRoute()
 }
