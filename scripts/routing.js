@@ -14,7 +14,7 @@ export const addRoutes = (newRoutes) => {
 }
 
 const handleRoute = () => {
-    const hash = window.location.hash.slice(1)
+    const hash = window.location.hash.slice(1) || '/'
     console.log("Handling Route:", hash)
     const matchingRoute = routes[hash] || routes["*"]
 
