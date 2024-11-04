@@ -8,11 +8,12 @@ export default () => {
 
     const middlePane = document.createElement("div")
     middlePane.classList.add("col-4")
-    middlePane.innerText = "Left"
+    middlePane.innerText = "middle"
 
     const rightPane = document.createElement("div")
     rightPane.classList.add("col-4")
-    rightPane.innerText = "Left"
+    rightPane.innerText = "Right"
+
 
     rootEl.replaceChildren([leftPane, middlePane, rightPane])
 
