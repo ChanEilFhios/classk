@@ -10,7 +10,8 @@ export const createElem = (classes = [], tag = "div", id = '') => {
     return newEl
 }
 
-export const createContainerElem = (classes = [], children = [], id = '') => {
+//Std Dom Elements
+export const div = (classes = [], children = [], id = '') => {
     const newEl = createElem(classes, "div", id)
 
     newEl.replaceChildren(...children)
@@ -18,10 +19,26 @@ export const createContainerElem = (classes = [], children = [], id = '') => {
     return newEl
 }
 
-export const createHdr = (text, level, classes = [], id = '') => {
+export const header = (text, level, classes = [], id = '') => {
     const newEl = createElem(classes, `h${level}`, id)
 
     newEl.innerText = text
 
     return newEl
+}
+
+//Bootstrap Elements
+export const row = (classes = [], children = [], id = '') => {
+    classes.push("row")
+
+    return div(classes, children, id)
+}
+
+export const col = (width, classes = [], children = [], id = '') => {
+    if (width > 0 && width < 13)
+        classes.push(`col-${width}`)
+    else
+        classes.push('col')
+
+    return div(classes, children, id)
 }
