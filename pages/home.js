@@ -13,7 +13,5 @@ export default () => {
         ])
     ])
 
-    rootEl.replaceChildren(today, tasks, exams)
-
     return rootEl
 }
