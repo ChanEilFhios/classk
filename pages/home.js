@@ -1,21 +1,21 @@
+import { createContainerElem, createHdr } from "../scripts/renderutils"
+
 export default () => {
     const rootEl = document.createElement("div")
     rootEl.classList.add("row")
 
-    const leftPane = document.createElement("div")
-    leftPane.classList.add("col-4")
-    leftPane.innerText = "Left"
+    const today = createContainerElem(["col-4"], [createHdr("Today", 1)])
 
     const middlePane = document.createElement("div")
     middlePane.classList.add("col-4")
-    middlePane.innerText = "middle"
+    middlePane.innerText = "Tasks"
 
     const rightPane = document.createElement("div")
     rightPane.classList.add("col-4")
-    rightPane.innerText = "Right"
+    rightPane.innerText = "Exams"
 
 
-    rootEl.replaceChildren(leftPane, middlePane, rightPane)
+    rootEl.replaceChildren(today, middlePane, rightPane)
 
     return rootEl
 }
