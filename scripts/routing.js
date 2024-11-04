@@ -23,7 +23,7 @@ const handleRoute = () => {
     } else console.log("Received unknown route:", hash)
 }
 
-export const navigate = (url) => {
+export const navigate = (path) => {
     const hash = path ? `#${path}` : '';
     
     window.location.hash = url
