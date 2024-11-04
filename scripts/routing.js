@@ -24,9 +24,9 @@ const handleRoute = () => {
 }
 
 export const navigate = (path) => {
-    const hash = path ? `#${path}` : '';
+    const hash = path ? `#${path}` : ''
     
-    window.location.hash = url
+    window.location.hash = hash
     handleRoute()
 }
 
