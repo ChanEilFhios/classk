@@ -15,7 +15,7 @@ export default () => {
     rightPane.innerText = "Right"
 
 
-    rootEl.replaceChildren([leftPane, middlePane, rightPane])
+    rootEl.replaceChildren(leftPane, middlePane, rightPane)
 
     return rootEl
 }
