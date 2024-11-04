@@ -5,17 +5,10 @@ export default () => {
     rootEl.classList.add("row")
 
     const today = createContainerElem(["col-4"], [createHdr("Today", 1)])
+    const tasks = createContainerElem(["col-4"], [createHdr("Tasks", 1)])
+    const exams = createContainerElem(["col-4"], [createHdr("Exams", 1)])
 
-    const middlePane = document.createElement("div")
-    middlePane.classList.add("col-4")
-    middlePane.innerText = "Tasks"
-
-    const rightPane = document.createElement("div")
-    rightPane.classList.add("col-4")
-    rightPane.innerText = "Exams"
-
-
-    rootEl.replaceChildren(today, middlePane, rightPane)
+    rootEl.replaceChildren(today, tasks, exams)
 
     return rootEl
 }
