@@ -1,17 +1,16 @@
-import { createContainerElem, createHdr } from "../scripts/renderutils.js"
+import { row, header, col } from "../scripts/renderutils.js"
 
 export default () => {
-    const rootEl = document.createElement("div")
-    rootEl.classList.add("row")
-
-    const today = createContainerElem(["col-4"], [
-        createHdr("Today", 1)
-    ])
-    const tasks = createContainerElem(["col-4"], [
-        createHdr("Tasks", 1)
-    ])
-    const exams = createContainerElem(["col-4"], [
-        createHdr("Exams", 1)
+    const rootEl = row([], [
+        col(4, [], [
+            header("Today", 1)
+        ]),
+        col(4, [], [
+            header("Tasks", 1)
+        ]),
+        col(4, [], [
+            header("Exams", 1)
+        ])
     ])
 
     rootEl.replaceChildren(today, tasks, exams)
