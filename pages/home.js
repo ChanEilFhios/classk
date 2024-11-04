@@ -1,4 +1,4 @@
-import { createContainerElem, createHdr } from "../scripts/renderutils"
+import { createContainerElem, createHdr } from "../scripts/renderutils.js"
 
 export default () => {
     const rootEl = document.createElement("div")
