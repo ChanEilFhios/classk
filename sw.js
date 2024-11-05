@@ -6,18 +6,18 @@ const { registerRoute } = workbox.routing
 const { CacheableResponsePlugin } = workbox.cacheableResponse
 const { ExpirationPlugin } = workbox.expiration
 
-// // Set up page cache
-// const pageCache = new networkFirst({
-//   cacheName: 'page-cache',
-//   plugins: [
-//     new CacheableResponsePlugin({
-//       statuses: [0, 200],
-//     }),
-//     new ExpirationPlugin({
-//       maxAgeSeconds: 60, //30 * 24 * 60 * 60,
-//     }),
-//   ],
-// })
+// Set up page cache
+const pageCache = new networkFirst({
+  cacheName: 'page-cache',
+  plugins: [
+    new CacheableResponsePlugin({
+      statuses: [0, 200],
+    }),
+    new ExpirationPlugin({
+      maxAgeSeconds: 60, //30 * 24 * 60 * 60,
+    }),
+  ],
+})
 
 // warmStrategyCache({
 //   urls: ['/classk/index.html', 'classk/'],
