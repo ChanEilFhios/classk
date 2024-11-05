@@ -1,7 +1,15 @@
-#minParentHeight {
-    min-height: 100%;
+:root {
+    --homeNaveHeight: 30px;
 }
 
 body {
     background: red;
+}
+
+#home-nav {
+    height: var(--homeNaveHeight)
+}
+
+#home-content {
+    min-height: calc(100vh - --homeNaveHeight)
 }

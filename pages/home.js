@@ -2,7 +2,7 @@ import { row, header, col } from "../scripts/renderutils.js"
 
 export default () => {
     return [
-        row(['border-bottom'], [
+        row(['border-bottom', 'home-nav'], [
             col(4, [], [
                 header("Today", 1)
             ]),
@@ -13,14 +13,14 @@ export default () => {
                 header("Exams", 1)
             ])
         ]),
-        row([], [
-            col(4, ['border-end', 'minParentHeight'], [
+        row(['home-content'], [
+            col(4, ['border-end', ''], [
                 header("Today", 1)
             ]),
-            col(4, ['border-end', 'minParentHeight'], [
+            col(4, ['border-end', ''], [
                 header("Tasks", 1)
             ]),
-            col(4, ['minParentHeight'], [
+            col(4, [''], [
                 header("Exams", 1)
             ])
         ])
