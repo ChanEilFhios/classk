@@ -14,13 +14,13 @@ export default () => {
             ])
         ]),
         row([], [
-            col(4, ['border-end'], [
+            col(4, ['border-end', 'minParentHeight'], [
                 header("Today", 1)
             ]),
-            col(4, ['border-end'], [
+            col(4, ['border-end', 'minParentHeight'], [
                 header("Tasks", 1)
             ]),
-            col(4, [], [
+            col(4, ['minParentHeight'], [
                 header("Exams", 1)
             ])
         ])
