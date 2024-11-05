@@ -6,7 +6,7 @@ export const renderPane =
 export const createElem = (classes = [], tag = "div", id = '') => {
     const newEl = document.createElement(tag)
 
-    classes.forEach(newClass => newClass || newEl.classList.add(newClass))
+    classes.forEach(newClass => newClass && newEl.classList.add(newClass))
     if (id) newEl.id = id
 
     return newEl
