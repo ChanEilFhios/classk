@@ -12,6 +12,17 @@ export default () => {
             col(4, [], [
                 header("Exams", 1)
             ])
+        ]),
+        row([], [
+            col(4, [], [
+                header("Today", 1)
+            ]),
+            col(4, [], [
+                header("Tasks", 1)
+            ]),
+            col(4, [], [
+                header("Exams", 1)
+            ])
         ])
     ]
 }
