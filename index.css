@@ -2,10 +2,10 @@
     --homeNaveHeight: 30px;
 }
 
-#home-nav {
+.home-nav {
     height: var(--homeNaveHeight)
 }
 
-#home-content {
+.home-content {
     min-height: calc(100vh - --homeNaveHeight)
 }
