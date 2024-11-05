@@ -6,7 +6,8 @@ export default () => {
 
    const navLinkEls = [
         {label: "Home", href: "/"},
-        {label: "About", href: "/about"}
+        {label: "Classes", href: "/classes"}
+        {label: "About", href: "/about"},
     ].map(link => {
         const linkEl = document.createElement("a")
         linkEl.classList.add("nav-link")
