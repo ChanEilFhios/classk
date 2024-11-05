@@ -20,7 +20,7 @@ const pageCache = new networkFirst({
 });
 
 warmStrategyCache({
-  urls: ['/index.html', '/'],
+  urls: ['./index.html', './'],
   strategy: pageCache,
 });
 
