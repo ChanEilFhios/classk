@@ -6,35 +6,35 @@ const { registerRoute } = workbox.routing
 const { CacheableResponsePlugin } = workbox.cacheableResponse
 const { ExpirationPlugin } = workbox.expiration
 
-// Set up page cache
-const pageCache = new networkFirst({
-  cacheName: 'page-cache',
-  plugins: [
-    new CacheableResponsePlugin({
-      statuses: [0, 200],
-    }),
-    new ExpirationPlugin({
-      maxAgeSeconds: 60, //30 * 24 * 60 * 60,
-    }),
-  ],
-});
+// // Set up page cache
+// const pageCache = new networkFirst({
+//   cacheName: 'page-cache',
+//   plugins: [
+//     new CacheableResponsePlugin({
+//       statuses: [0, 200],
+//     }),
+//     new ExpirationPlugin({
+//       maxAgeSeconds: 60, //30 * 24 * 60 * 60,
+//     }),
+//   ],
+// })
 
-warmStrategyCache({
-  urls: ['./index.html', './'],
-  strategy: pageCache,
-});
+// warmStrategyCache({
+//   urls: ['/classk/index.html', 'classk/'],
+//   strategy: pageCache,
+// })
 
-registerRoute(({ request }) => request.mode === 'navigate', pageCache);
+// registerRoute(({ request }) => request.mode === 'navigate', pageCache)
 
-registerRoute(
-    ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
-    new networkFirst({
-      cacheName: 'asset-cache',
-      plugins: [
-        new CacheableResponsePlugin({
-          statuses: [0, 200],
-        }),
-      ],
-    }),
-  );
+// registerRoute(
+//     ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
+//     new networkFirst({
+//       cacheName: 'asset-cache',
+//       plugins: [
+//         new CacheableResponsePlugin({
+//           statuses: [0, 200],
+//         }),
+//       ],
+//     }),
+//   )
   
