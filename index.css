@@ -7,5 +7,5 @@
 }
 
 .home-content {
-    min-height: calc(100vh - --homeNaveHeight)
+    min-height: calc(100vh - var(--homeNaveHeight))
 }
