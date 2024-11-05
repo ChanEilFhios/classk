@@ -2,10 +2,6 @@
     --homeNaveHeight: 30px;
 }
 
-body {
-    background: red;
-}
-
 #home-nav {
     height: var(--homeNaveHeight)
 }

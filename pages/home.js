@@ -14,10 +14,10 @@ export default () => {
             ])
         ]),
         row(['home-content'], [
-            col(4, ['border-end', ''], [
+            col(4, ['border-end'], [
                 header("Today", 1)
             ]),
-            col(4, ['border-end', ''], [
+            col(4, ['border-end'], [
                 header("Tasks", 1)
             ]),
             col(4, [''], [
