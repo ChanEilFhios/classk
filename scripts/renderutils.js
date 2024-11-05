@@ -1,4 +1,4 @@
-import { arrayify } from "./utils"
+import { arrayify } from "./utils.js"
 
 export const renderPane =
     (parentElement, renderFn) => parentElement.replaceChildren(...arrayify(renderFn()))
