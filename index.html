@@ -34,11 +34,13 @@
     import notFoundPage from './pages/notfoundpage.js'
     import sideNav from './panes/sideNav.js'
     import aboutpage from './pages/about.js'
+    import classesPage from './pages/classes.js'
     
     document.addEventListener("DOMContentLoaded", () => {
       renderPane(document.getElementById("sideNav"), sideNav)
 
       navigation(document.getElementById("content"), homePage, notFoundPage, {
+        "/classes": 
         "/about": aboutpage
       })
     })
