@@ -27,7 +27,6 @@ export const navigate = (path) => {
     const hash = path ? `#${path}` : ''
     
     window.location.hash = hash
-    handleRoute()
 }
 
 export const linkify = (linkElement) => {
