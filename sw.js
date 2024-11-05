@@ -3,7 +3,7 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/7.3.0/workbox
 const { warmStrategyCache } = workbox.recipes
 const { CacheFirst, staleWhileRevalidated, networkFirst } = workbox.strategies
 const { registerRoute } = workbox.routing
-const { CacheableResponsePlugin } = workbox.cacheable-response
+const { CacheableResponsePlugin } = workbox.cacheableResponse
 const { ExpirationPlugin } = workbox.expiration
 
 // Set up page cache
