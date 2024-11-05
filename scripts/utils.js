@@ -1,0 +1,1 @@
+export const arrayify = (possibleArray) => (Array.isArray(possibleArray)) ? possibleArray : [possibleArray]
