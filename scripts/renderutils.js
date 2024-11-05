@@ -1,5 +1,7 @@
+import { arrayify } from "./utils"
+
 export const renderPane =
-    (parentElement, renderFn) => parentElement.replaceChildren(renderFn())
+    (parentElement, renderFn) => parentElement.replaceChildren(...arrayify(renderFn()))
 
 export const createElem = (classes = [], tag = "div", id = '') => {
     const newEl = document.createElement(tag)
