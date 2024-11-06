@@ -29,6 +29,17 @@ export const header = (text, level, classes = [], id = '') => {
     return newEl
 }
 
+export const button = (text, type, classes = [], id = '') => {
+    classes.push('btn')
+    classes.push(`btn-${type}`)
+
+    const newEl = createElem(classes, "button", id)
+    newEl.innerHTML = text
+    newEl.setAttribute('type', 'button')
+
+    return newEl
+}
+
 //Bootstrap Elements
 export const row = (classes = [], children = [], id = '') => {
     classes.push("row")
