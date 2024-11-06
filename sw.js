@@ -19,10 +19,10 @@ const pageCache = new NetworkFirst({
   ],
 })
 
-// warmStrategyCache({
-//   urls: ['/classk/index.html', 'classk/'],
-//   strategy: pageCache,
-// })
+WarmStrategyCache({
+  urls: ['/classk/index.html', 'classk/'],
+  strategy: pageCache,
+})
 
 // registerRoute(({ request }) => request.mode === 'navigate', pageCache)
 
