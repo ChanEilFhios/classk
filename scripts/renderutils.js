@@ -31,7 +31,7 @@ export const header = (text, level, classes = [], id = '') => {
 
 export const button = (text, type, classes = [], id = '') => {
     classes.push('btn')
-    classes.push(`btn-${type}`)
+    classes.push(`btn-outline-${type}`)
 
     const newEl = createElem(classes, "button", id)
     newEl.innerHTML = text
