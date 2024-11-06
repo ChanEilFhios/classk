@@ -1,8 +1,8 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/7.3.0/workbox-sw.js')
 
-const { WarmStrategyCache } = workbox.recipes
-const { CacheFirst, StaleWhileRevalidated, NetworkFirst } = workbox.strategies
-const { RegisterRoute } = workbox.routing
+const { warmStrategyCache } = workbox.recipes
+const { CacheFirst, StaleWhileRevalidate, NetworkFirst } = workbox.strategies
+const { registerRoute } = workbox.routing
 const { CacheableResponsePlugin } = workbox.cacheableResponse
 const { ExpirationPlugin } = workbox.expiration
 
@@ -19,7 +19,7 @@ const pageCache = new NetworkFirst({
   ],
 })
 
-WarmStrategyCache({
+warmStrategyCache({
   urls: ['/classk/index.html', 'classk/'],
   strategy: pageCache,
 })
