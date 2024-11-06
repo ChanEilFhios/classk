@@ -7,9 +7,9 @@ export default () => {
             col(4, [], [
                 header("Today", 1)
             ]),
-            col(4, [], [
+            col(4, [],
                 taskHeader()
-            ]),
+            ),
             col(4, [], [
                 header("Exams", 1)
             ])
