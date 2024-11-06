@@ -8,7 +8,7 @@ export default () => {
             col(4, [], [
                 header("Today", 1)
             ]),
-            col(4, ['align-middle'],
+            col(4, ['align-middle', 'h-100'],
                 arrayify(taskHeader())
             ),
             col(4, [], [
