@@ -1,4 +1,5 @@
 import { row, header, col } from "../scripts/renderutils.js"
+import { arrayify } from "../scripts/utils.js"
 import taskHeader from "../panes/taskHdr.js"
 
 export default () => {
@@ -8,7 +9,7 @@ export default () => {
                 header("Today", 1)
             ]),
             col(4, [],
-                taskHeader()
+                arrayify(taskHeader())
             ),
             col(4, [], [
                 header("Exams", 1)
