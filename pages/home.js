@@ -1,4 +1,5 @@
 import { row, header, col } from "../scripts/renderutils.js"
+import taskHeader from "../panes/taskHdr.js"
 
 export default () => {
     return [
@@ -7,7 +8,7 @@ export default () => {
                 header("Today", 1)
             ]),
             col(4, [], [
-                header("Tasks", 1)
+                taskHeader()
             ]),
             col(4, [], [
                 header("Exams", 1)
