@@ -4,8 +4,8 @@ export default () => {
     return [
         header('Tasks', 1, ['d-inline', 'align-middle']),
         addAttributes(button('+', 'primary', ['btn-sm', 'align-middle', 'ms-2']), [
-            "data-bs-toggle", "modal",
-            "data-bs-target", "#classktask"
+            {attribute: "data-bs-toggle", value: "modal"},
+            {attribute: "data-bs-target", value: "#classktask"}
         ])
     ]
 }
