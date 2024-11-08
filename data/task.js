@@ -1,11 +1,11 @@
+import { Modal } from 'bootstrap'
 
 export const initModal = (modalElement) => {
     const crudModal = modalElement
-    const form = crudModal.querySelector('form')
+    const form = crudModal.querySelector('#classktaskform')
     const deleteBtn = crudModal.querySelector('#taskdelete')
     const saveBtn = crudModal.querySelector('#tasksave')
 
-    const submitTrigger = (e) => form.requestSubmit(e.target)
     const resetModal = () => {
         form.reset()
         deleteBtn.classList.add('d-none')
