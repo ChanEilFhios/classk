@@ -1,4 +1,5 @@
 import { arrayify } from "./utils.js"
+import { Modal } from 'bootstrap'
 
 //Helpers
 export const renderPane =
@@ -8,7 +9,7 @@ export const openDlg = () => {
     const dlgId = window.prompt("Which dialog?")
 
     if (dlgId) {
-        const modal = new bootstrap.Modal(document.getElementById(dlgId))
+        const modal = new Modal(document.getElementById(dlgId))
         modal.show()
     }
 }
