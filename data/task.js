@@ -29,9 +29,13 @@ export const initModal = (modalElement) => {
 
     form.addEventListener('submit', (e) => {
         const action = (e.submitter) ? e.submitter.getAttribute('data-classk-action') : 'save'
-        const form = new FormData(e.target, e.submitter)
+        const formData = new FormData(e.target, e.submitter)
 
-        console.log("action", action, "Form Data", formData.entries)
+        console.log("action", action, "Form Data")
+        for (var [key, value] of formData.entries()) { 
+            console.log(key, value);
+        }
+    
         bsModal.hide()
     })
 }
