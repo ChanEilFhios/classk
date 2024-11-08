@@ -1,18 +1,11 @@
-let crudModal
-let taskId
-let form
-let deleteBtn
-
-export const resetModal = () => {
-    if (form) form.reset()
-
-    if (deleteBtn) deleteBtn.classList.add('d-none')
-}
 
 export const initModal = (modalElement) => {
-    crudModal = modalElement
-    form = crudModal.querySelector('form')
-    deleteBtn = crudModal.querySelector('#taskdelete')
+    const crudModal = modalElement
+    const form = crudModal.querySelector('form')
+    const deleteBtn = crudModal.querySelector('#taskdelete')
+    const saveBtn = crudModal.querySelector('#tasksave')
+
+    const submitTrigger = (e) => form.requestSubmit(e.target)
 
     crudModal.addEventListener('show.bs.modal', (e) => {
         const trigger = e.relatedTarget //Which button triggered the modal.
@@ -33,4 +26,13 @@ export const initModal = (modalElement) => {
 
         console.log("action", action, "Form Data", formData)
     })
+    form.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            form.requestSubmit(saveBtn);
+        }
+    })
+
+    deleteBtn.addEventListener('click', submitTrigger)
+    saveBtn.addEventListener('click', submitTrigger)
 }
