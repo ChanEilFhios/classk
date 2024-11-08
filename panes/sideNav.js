@@ -1,5 +1,5 @@
 import { linkify } from "../scripts/routing.js"
-import { openDlg, button } from "../scripts/renderutils.js"
+import { openDlg, button, addHandler } from "../scripts/renderutils.js"
 
 export default () => {
     const pageRootEl = document.createElement("ul")
@@ -23,7 +23,7 @@ export default () => {
     })
 
     navLinkEls.forEach(el => pageRootEl.appendChild(el))
-    navLinkEls.appendChild(button('Show Dialog', "primary"))
+    pageRootEl.appendChild(addHandler(button('Show Dialog', "primary"), openDlg))
 
     return pageRootEl
 }
