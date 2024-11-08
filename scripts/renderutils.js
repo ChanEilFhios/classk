@@ -1,7 +1,17 @@
 import { arrayify } from "./utils.js"
 
+//Helpers
 export const renderPane =
     (parentElement, renderFn) => parentElement.replaceChildren(...arrayify(renderFn()))
+
+export const openDlg = () => {
+    const dlgId = window.prompt("Which dialog?")
+
+    if (dlgId) {
+        const modal = new bootstrap.Modal(document.getElementById(dlgId))
+        modal.show()
+    }
+}
 
 export const createElem = (classes = [], tag = "div", id = '') => {
     const newEl = document.createElement(tag)
@@ -10,6 +20,11 @@ export const createElem = (classes = [], tag = "div", id = '') => {
     if (id) newEl.id = id
 
     return newEl
+}
+
+//Plumbing helpers
+export const addHandler = (Element, handler, event = "click") => {
+    Element.addEventListener(event, handler)
 }
 
 //Std Dom Elements
