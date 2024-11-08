@@ -23,9 +23,14 @@ export const createElem = (classes = [], tag = "div", id = '') => {
     return newEl
 }
 
-//Plumbing helpers
 export const addHandler = (element, handler, event = "click") => {
     element.addEventListener(event, handler)
+
+    return element
+}
+
+export const addAttribute = (element, attribute, value) => {
+    element.setAttribute(attribute, value)
 
     return element
 }
