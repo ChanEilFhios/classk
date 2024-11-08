@@ -26,7 +26,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="clasktaskform">
             <div class="form-floating mb-3">
               <input type="text" name="ClassName" id="taskclass" placeholder="Class" class="form-control" required />
               <label for="taskclass" class="form-label">Class</label>
@@ -59,11 +59,11 @@
         </div>
         <div class="modal-footer justify-content-between">
           <div>
-            <button type="submit" form="classktask" id="taskdelete" name="delete" class="btn btn-danger">Delete...</button>
+            <button type="submit" form="classktaskform" id="taskdelete" name="delete" class="btn btn-danger">Delete...</button>
           </div>
           <div>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" form="classktask" id="tasksave" name="save" class="btn btn-primary">Save changes</button>
+            <button type="submit" form="classktaskform" id="tasksave" name="save" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
