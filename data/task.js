@@ -7,7 +7,7 @@ export const initModal = (modalElement) => {
     const form = crudModal.querySelector('#classktaskform')
     const deleteBtn = crudModal.querySelector('#taskdelete')
     const saveBtn = crudModal.querySelector('#tasksave')
-    const dueDate = crudModal.querySelector('input[type="datetime_local"')
+    const dueDate = crudModal.querySelector('input[type="datetime_local"]')
 
     const resetModal = () => {
         form.reset()
