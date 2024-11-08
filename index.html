@@ -22,10 +22,26 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">New Task</h5>
+          <h5 class="modal-title">Task</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <form>
+            <label for="taskclass">Class</label>
+            <input type="text" name="ClassName" id="taskclass" required />
+            <label for="tasktype">Type</label>
+            <select name="Type" id="tasktype" required>
+              <option value="assignment">Assignment</option>
+              <option value="reminder">Reminder</option>
+              <option value="revision">Revision</option>
+            </select>
+            <label for="taskduedate">Due Date</label>
+            <input type="datetime-local" name="DueDate" id="taskduedate" required />
+            <label for="tasktitle">Title</label>
+            <input type="text" name="Title" id="tasktitle" required />
+            <label for="taskdesc">Description</label>
+            <textarea name="Description" id="taskdesc">Description</textarea>
+          </form>
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-danger">Delete...</button>
