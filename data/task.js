@@ -14,16 +14,6 @@ export const initModal = (modalElement) => {
     }
     const loadTask = () => {}
 
-    const handleSubmit = (action) => {
-        const formData = new FormData(form)
-
-        console.log("action", action, "Form Data")
-        for (var [key, value] of formData.entries()) { 
-            console.log(key, value);
-        }
-    
-        bsModal.hide()
-    }
 
     crudModal.addEventListener('show.bs.modal', (e) => {
         const trigger = e.relatedTarget //Which button triggered the modal.
@@ -47,6 +37,13 @@ export const initModal = (modalElement) => {
     form.addEventListener('submit', (e) => {
         const action = (e.submitter) ? e.submitter.getAttribute('data-classk-action') : 'save'
         e.preventDefault()
-        handleSubmit(action)
+        const formData = new FormData(form, e.submitter)
+
+        console.log("Form Data")
+        for (var [key, value] of formData.entries()) { 
+            console.log(key, ': ', value);
+        }
+    
+        bsModal.hide()
     })
 }
