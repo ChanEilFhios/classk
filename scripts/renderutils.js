@@ -35,6 +35,12 @@ export const addAttribute = (element, attribute, value) => {
     return element
 }
 
+export const addAttributes = (element, valueNamePairs = []) => {
+    valueNamePairs.forEach(({attribute, value}) => element.setAttribute(attribute, value))
+
+    return element
+}
+
 //Std Dom Elements
 export const div = (classes = [], children = [], id = '') => {
     const newEl = createElem(classes, "div", id)
