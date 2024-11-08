@@ -2,6 +2,8 @@ import { Modal } from 'bootstrap'
 
 export const initModal = (modalElement) => {
     const crudModal = modalElement
+    const bsModal = new Modal(crudModal)
+
     const form = crudModal.querySelector('#classktaskform')
     const deleteBtn = crudModal.querySelector('#taskdelete')
     const saveBtn = crudModal.querySelector('#tasksave')
@@ -29,6 +31,7 @@ export const initModal = (modalElement) => {
         const action = (e.submitter) ? e.submitter.getAttribute('data-classk-action') : 'save'
         const form = new FormData(e.target, e.submitter)
 
-        console.log("action", action, "Form Data", formData)
+        console.log("action", action, "Form Data", formData.entries)
+        bsModal.hide()
     })
 }
