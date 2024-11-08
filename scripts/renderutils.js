@@ -23,8 +23,10 @@ export const createElem = (classes = [], tag = "div", id = '') => {
 }
 
 //Plumbing helpers
-export const addHandler = (Element, handler, event = "click") => {
-    Element.addEventListener(event, handler)
+export const addHandler = (element, handler, event = "click") => {
+    element.addEventListener(event, handler)
+
+    return element
 }
 
 //Std Dom Elements
