@@ -15,7 +15,7 @@ export const initModal = (modalElement) => {
     const loadTask = () => {}
 
     const handleSubmit = (action) => {
-        const formData = new FormData(e.target, e.submitter)
+        const formData = new FormData(form)
 
         console.log("action", action, "Form Data")
         for (var [key, value] of formData.entries()) { 
@@ -40,7 +40,7 @@ export const initModal = (modalElement) => {
     form.addEventListener('keydown', (e) => {
         if (e.key === "Enter") {
             e.preventDefault()
-            handleSubmit('save')
+            form.requestSubmit(saveBtn)
         }
     })
 
