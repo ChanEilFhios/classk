@@ -1,4 +1,4 @@
-import { header, button, addAttribute } from "../scripts/renderutils.js"
+import { header, button, addAttributes } from "../scripts/renderutils.js"
 
 export default () => {
     return [
