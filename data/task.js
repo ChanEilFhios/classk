@@ -12,7 +12,7 @@ export const resetModal = () => {
 export const initModal = (modalElement) => {
     crudModal = modalElement
     form = crudModal.querySelector('form')
-    deleteBtn = crudModal.getElementById('taskdelete')
+    deleteBtn = crudModal.querySelector('#taskdelete')
 
     crudModal.addEventListener('show.bs.modal', (e) => {
         const trigger = e.relatedTarget //Which button triggered the modal.
