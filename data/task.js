@@ -6,6 +6,11 @@ export const initModal = (modalElement) => {
     const saveBtn = crudModal.querySelector('#tasksave')
 
     const submitTrigger = (e) => form.requestSubmit(e.target)
+    const resetModal = () => {
+        form.reset()
+        deleteBtn.classList.add('d-none')
+    }
+    const loadTask = () => {}
 
     crudModal.addEventListener('show.bs.modal', (e) => {
         const trigger = e.relatedTarget //Which button triggered the modal.
@@ -13,7 +18,7 @@ export const initModal = (modalElement) => {
         
         if (taskId) {
             //We're modifying
-            loadTaskToModal(taskId)
+            loadTask(taskId)
         } else {
             //We're adding a new one.
             resetModal()
@@ -26,13 +31,4 @@ export const initModal = (modalElement) => {
 
         console.log("action", action, "Form Data", formData)
     })
-    form.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            form.requestSubmit(saveBtn);
-        }
-    })
-
-    deleteBtn.addEventListener('click', submitTrigger)
-    saveBtn.addEventListener('click', submitTrigger)
 }
