@@ -14,7 +14,7 @@ export const initModal = (modalElement) => {
         form.reset()
         dueDate.value = new Date(Date.now()).toJSON().substring(0, 16);
         dueDate.min = new Date(Date.now()).toJSON().substring(0, 16);
-        modalTitle.innerHtml = "New Task"
+        modalTitle.innerHTML = "New Task"
 
         deleteBtn.classList.add('d-none')
     }
