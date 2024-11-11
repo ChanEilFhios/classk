@@ -4,6 +4,7 @@ export const initModal = (modalElement) => {
     const crudModal = modalElement
     const bsModal = new Modal(crudModal)
 
+    const modalTitle = crudModal.querySelector(".modal-title")
     const form = crudModal.querySelector('#classktaskform')
     const deleteBtn = crudModal.querySelector('#taskdelete')
     const saveBtn = crudModal.querySelector('#tasksave')
@@ -13,6 +14,7 @@ export const initModal = (modalElement) => {
         form.reset()
         dueDate.value = new Date(Date.now()).toJSON().substring(0, 16);
         dueDate.min = new Date(Date.now()).toJSON().substring(0, 16);
+        modalTitle.innerHtml = "New Task"
 
         deleteBtn.classList.add('d-none')
     }
