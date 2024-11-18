@@ -6,6 +6,16 @@ export const name = 'task'
 export const schema = '++id, class, name, duedate'
 export const registerDataMgr = newDataMgr => dataMgr = newDataMgr
 
+export const addTask = (newTask) => db.tasks.add(newTask)
+
+export const updateTask = (updatedTask) => {
+
+}
+
+export const deleteTask = (taskId) => {
+
+}
+
 export const initModal = (modalElement) => {
     const crudModal = modalElement
     const bsModal = new Modal(crudModal)
@@ -51,9 +61,8 @@ export const initModal = (modalElement) => {
         e.preventDefault()
         const formData = new FormData(form, e.submitter)
 
-        console.log("Form Data")
         const taskData = Object.fromEntries(formData)
-        console.log(taskData)
+        if (action === 'save') addTask(taskData)
     
         bsModal.hide()
     })
