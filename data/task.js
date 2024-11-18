@@ -59,5 +59,3 @@ export const initModal = (modalElement) => {
         bsModal.hide()
     })
 }
-
- export const iDBShape = "++id, classID, type, title, duedate, description"

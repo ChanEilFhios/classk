@@ -15,7 +15,7 @@ import {Dexie} from 'dexie'
 //   console.log(yay)
 // }).catch((e) => console.log(e))
 
-export default () => {
+export const initDataMgr = () => {
     const db = new Dexie('Classk')
     const schemas = {}
 
