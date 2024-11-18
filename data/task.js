@@ -6,7 +6,7 @@ export const name = 'task'
 export const schema = '++id, class, name, duedate'
 export const registerDataMgr = newDataMgr => db = newDataMgr
 
-export const addTask = (newTask) => db.tables(name).add(newTask)
+export const addTask = (newTask) => db.table(name).add(newTask)
 
 export const updateTask = (updatedTask) => {
 
