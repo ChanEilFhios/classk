@@ -22,6 +22,7 @@ export const initDataMgr = () => {
     return {
         registerEntity: (newEntity, version=1) => {
             const entityName = newEntity.name
+            if (!schemas[version]) schemas[version] = {}
             schemas[version][entityName] = newEntity.schema
 
             newEntity.registerDataMgr(() => db.table(entityName))
