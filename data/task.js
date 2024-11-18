@@ -1,10 +1,10 @@
 import { Modal } from 'bootstrap'
 
-let dataMgr
+let db
 
 export const name = 'task'
 export const schema = '++id, class, name, duedate'
-export const registerDataMgr = newDataMgr => dataMgr = newDataMgr
+export const registerDataMgr = newDataMgr => db = newDataMgr
 
 export const addTask = (newTask) => db.tasks.add(newTask)
 
