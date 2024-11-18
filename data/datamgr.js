@@ -25,7 +25,7 @@ export const initDataMgr = () => {
             if (!schemas[version]) schemas[version] = {}
             schemas[version][entityName] = newEntity.schema
 
-            newEntity.registerDataMgr(() => db.table(entityName))
+            newEntity.registerDataMgr(db.table(entityName))
         },
         startDataMgr: (version) => {
             db.version(version).stores(schemas[version])
