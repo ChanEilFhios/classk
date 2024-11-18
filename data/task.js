@@ -1,5 +1,11 @@
 import { Modal } from 'bootstrap'
 
+let dataMgr
+
+export const name = 'task'
+export const schema = '++id, class, name, duedate'
+export const registerDataMgr = newDataMgr => dataMgr = newDataMgr
+
 export const initModal = (modalElement) => {
     const crudModal = modalElement
     const bsModal = new Modal(crudModal)
