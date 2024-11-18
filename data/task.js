@@ -52,9 +52,8 @@ export const initModal = (modalElement) => {
         const formData = new FormData(form, e.submitter)
 
         console.log("Form Data")
-        for (var [key, value] of formData.entries()) { 
-            console.log(key, ': ', value);
-        }
+        const taskData = Object.fromEntries(formData)
+        console.log(taskData)
     
         bsModal.hide()
     })
