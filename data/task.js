@@ -12,6 +12,8 @@ export const schemas = [
     }
 ]
 
+export const getTasks = async () => (dbTable) ? dbTable.toArray() : []
+
 export const addTask = (newTask) => dbTable.add(newTask)
 
 export const updateTask = (updatedTask) => {

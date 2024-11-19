@@ -41,6 +41,22 @@ export const addAttributes = (element, valueNamePairs = []) => {
     return element
 }
 
+export const setText = (element, text) => {
+    element.innerText = text
+
+    return element
+}
+
+export const tombstone = (promisedElements) => {
+    const tombstone = div()
+
+    promisedElements.then((contentElements) => {
+        tombstone.replaceWith(contentElements)
+    })
+
+    return tombstone
+}
+
 //Std Dom Elements
 export const div = (classes = [], children = [], id = '') => {
     const newEl = createElem(classes, "div", id)
