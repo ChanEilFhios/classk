@@ -12,7 +12,7 @@ export const schemas = [
     }
 ]
 
-export const addTask = (newTask) => dbTable(name).add(newTask)
+export const addTask = (newTask) => dbTable.add(newTask)
 
 export const updateTask = (updatedTask) => {
 
