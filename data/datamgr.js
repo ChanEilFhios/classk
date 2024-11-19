@@ -4,7 +4,7 @@ const entities = []
 const versions = {
     1: {
         schemas:{},
-        updgradeFns: []
+        upgradeFns: []
     }
 }
 
@@ -30,9 +30,9 @@ const versions = {
 //   console.log(yay)
 // }).catch((e) => console.log(e))
 
-export const registerEntity = entity => {
+export const registerEntity = newEntity => {
     entities.push(newEntity)
-    newEntity.getSchemas().forEach(({versionNum, schema, upgradeFn}) => {
+    newEntity.schemas.forEach(({versionNum, schema, upgradeFn}) => {
         if (!versions[versionNum]) versions[versionNum] = {schemas: {}, upgradeFns: []}
         versions[versionNum].schemas[newEntity.name] = schema
         if (upgradeFn) versions[versionNum].upgradeFns.push(upgradeFn)
@@ -58,4 +58,6 @@ export const startDataMgr = () => {
             entity.setTable(db.table(entity.name))
         })
     })
+
+    db.open()
 }

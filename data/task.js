@@ -5,12 +5,12 @@ let dbTable
 export const name = 'task'
 export const setTable = table => dbTable = table
 
-export const getVersions = () => ({
-    1: {
-        schema: '++id, class, name, duedate',
-        upgradeFns: []
+export const schemas = [
+    {
+        versionNum: 1,
+        schema: '++id, class, name, duedate'
     }
-})
+]
 
 export const addTask = (newTask) => dbTable(name).add(newTask)
 

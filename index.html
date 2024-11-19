@@ -89,7 +89,7 @@
     import aboutpage from './pages/about.js'
     import classesPage from './pages/classes.js'
 
-    import {initDataMgr} from './data/datamgr.js'
+    import * as dataMgr from './data/datamgr.js'
     import * as task from './data/task.js'
     
     document.addEventListener("DOMContentLoaded", () => {
@@ -100,12 +100,10 @@
         "/about": aboutpage
       })
 
-      const dataMgr = initDataMgr()
-
       task.initModal(document.getElementById('classktask'))
       dataMgr.registerEntity(task, 1)
 
-      dataMgr.startDataMgr(1)
+      dataMgr.startDataMgr()
     })
 
     if ('serviceWorker' in navigator) {
