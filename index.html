@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classk</title>
+  <link rel="shortcut icon" href="icons8-school-color-hand-drawn-96.png">
+  <link href="index.css" rel="stylesheet">
+</head>
+<body>  
+  <!-- Scripts -->
+  <script type="importmap">
+    {"imports": {
+      "dexie": "https://cdn.jsdelivr.net/npm/dexie@4.0.9/+esm",
+      "dexieCloud": "https://cdn.jsdelivr.net/npm/dexie-cloud-addon@4.0.8/+esm",
+      "main": "./main.js",
+      "vanjs-core": "https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.5.3.min.js",
+      "vanjs-ui": "https://cdn.jsdelivr.net/npm/vanjs-ui@0.11.5/dist/van-ui.js",
+      "chartJs": "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/+esm"
+    }}
+  </script>
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(registration => {
+          console.log('Service Worker registered: ', registration)
+        }).catch(registrationError => {
+          console.log('Service Worker registration failed: ', registrationError)
+        })
+      })
+    }
+  </script>
+  <script type="module" src="./datamgr.js"></script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
