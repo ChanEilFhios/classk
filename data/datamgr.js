@@ -30,7 +30,7 @@ db.open()
         dbStatus.val = status
         console.log("cloudStatus", status)
     })
-
+    console.log(db)
 })
 .catch((e) => {
     console.log("Database open failed.")
@@ -38,3 +38,4 @@ db.open()
 })
 
 export const cloudStatus = () => dbStatus
+export const dataMgr = () => db
