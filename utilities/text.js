@@ -1,0 +1,1 @@
+export const capitalizeWord = (word) => word.replace(/^./, char => char.toUpperCase())

@@ -89,6 +89,14 @@ input[type='checkbox'] + label {
 
 .vnav {
     border-right: solid var(--border-color) var(--border-width);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navstatus {
+    align-self: center;
 }
 
 .columnheader {
