@@ -1,5 +1,8 @@
 import dexie from 'dexie'
 import dexieCloud from 'dexieCloud'
+import van from "vanjs-core"
+
+let dbStatus = van.state("Not opened")
 
 const db = new dexie("classk", {
     addons: [dexieCloud]
@@ -21,8 +24,17 @@ db.cloud.configure({
 db.open()
 .then(() => {
     console.log("database opened")
+    const cloudStatusObservable = db.cloud.webSocketStatus
+
+    cloudStatusObservable.subscribe((status) => {
+        dbStatus.val = status
+        console.log("cloudStatus", status)
+    })
+
 })
 .catch((e) => {
     console.log("Database open failed.")
     console.log(e)
 })
+
+export const cloudStatus = () => dbStatus
