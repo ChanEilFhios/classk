@@ -4,7 +4,7 @@ import { Await } from "vanjs-ui"
 import pane, { paneSection } from "../components/pane.js"
 import { getClasses, addClassModal, lastUpdate } from "../data/classes.js"
 
-const { button, h1, span } = van.tags
+const { button, div, h1, span } = van.tags
 
 export const todayHdr = (position, properties = {}) =>
   columnhdr(
@@ -15,13 +15,13 @@ export const todayHdr = (position, properties = {}) =>
   )
 
 export const todayPane = (position, properties = {}) =>
-  pane(position, properties, paneSection("Classes", properties, classesPane()))
+  pane(position, properties, paneSection("Classes", classesList()))
 
-export const classesPane = (position, properties = {}) => {
+export const classesList = () => {
   let previousUpdate = 0
 
   return () =>
-    pane(position, properties, (dom) => {
+    div((dom) => {
       if (lastUpdate.val !== previousUpdate) {
         previousUpdate = lastUpdate.val
         const classes = van.state(getClasses())
