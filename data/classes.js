@@ -8,7 +8,7 @@ const { button, div, form, label } = van.tags
 export const lastUpdate = van.state(Date.now())
 export const schema = "@id,name,start,end,days"
 
-export const classesList = () => {
+export const listClasses = (renderClasses = (val) => val) => {
   let previousUpdate = 0
 
   return () =>
@@ -25,7 +25,7 @@ export const classesList = () => {
           },
           (classList) => {
             console.log("rendering", classList)
-            return classList
+            return renderClasses(classList)
           }
         )
       } else {
