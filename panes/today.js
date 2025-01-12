@@ -16,6 +16,12 @@ export const todayHdr = (position, properties = {}) =>
         button({onclick: () => addClassModal()}, "Add Class..."),
     )
 
+export const todayPane = (position, properties = {}) =>
+    pane(position, properties,
+        div("Classes"),
+        div("Tomorrow")
+    )
+
 export const classesPane = (position, properties = {}) => {
     let previousUpdate = 0
 
