@@ -3,12 +3,19 @@ import { dataMgr } from "./datamgr.js"
 import formInput, { formInputProperties } from "../components/forminput.js"
 import { Await, Modal } from "vanjs-ui"
 
-const { button, div, form, label } = van.tags
+const { br, button, div, form, label } = van.tags
 
 export const lastUpdate = van.state(Date.now())
 export const schema = "@id,name,start,end,days"
 
-export const listClasses = (renderClasses = (val) => val) => {
+const timeNameItem = (aClass) =>
+  div(
+    { class: "timenameitem" },
+    div({ class: "classtimes" }, aClass.start, br(), aClass.end),
+    div({ class: "classname" }, aClass.name)
+  )
+
+export const listClasses = (renderClass = timeNameItem) => {
   let previousUpdate = 0
 
   return () =>
@@ -24,8 +31,9 @@ export const listClasses = (renderClasses = (val) => val) => {
             Error: (e) => `Unable to load: ${e}`,
           },
           (classList) => {
-            console.log("rendering", classList)
-            return renderClasses(classList)
+            const classListElements = classList.map(renderClass)
+            console.log("rendering", classListElements)
+            return div(classListElements)
           }
         )
       } else {
@@ -84,14 +92,7 @@ export const addClassModal = (initialData) => {
 }
 
 export const getClasses = () => {
-  return dataMgr()
-    .class.toArray()
-    .then((allClasses) => {
-      return allClasses.map((aClass) => aClass.name).join("<br/>")
-    })
-    .then((classlist) => {
-      return classlist
-    })
+  return dataMgr().class.toArray()
 }
 
 export const addClass = (newClass) => {
