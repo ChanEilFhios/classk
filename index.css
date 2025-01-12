@@ -1,5 +1,5 @@
 :root {
-    --border-color: blue;
+    --border-color: #b2b2b2;
     --narrow-border-width: 0.1em;
     --border-width: 0.2em;
     --button-color: #EEEEEE;
@@ -25,7 +25,7 @@ body {
     grid-template-rows: auto 1fr auto 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    background-color: lightyellow;
+    background-color: ghostwhite;
 }
 
 label {
