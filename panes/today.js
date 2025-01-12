@@ -3,9 +3,9 @@ import columnhdr from "../components/columnhdr.js"
 import formInput, { formInputProperties } from "../components/forminput.js"
 import { Await, Modal } from "vanjs-ui"
 import pane from "../components/pane.js"
-import { getClasses, addClass } from "../data/classes.js"
+import { getClasses, addClass, lastUpdate } from "../data/classes.js"
 
-const { button, div, form, h1, input, label, span, table, tbody, th, thead, tr } = van.tags
+const { button, div, form, h1, label, span } = van.tags
 
 export const todayHdr = (position, properties = {}) =>
     columnhdr(position, properties,
@@ -17,16 +17,27 @@ export const todayHdr = (position, properties = {}) =>
     )
 
 export const classesPane = (position, properties = {}) => {
-    const classes = van.state(getClasses())
+    let previousUpdate = 0
+
     return () => pane(position, properties, h1("Classes:"),
-            Await({
-                value: classes.val,
-                Loading: () => "🌀 Loading...",
-                Error: (e) => `Unable to load: ${e}`
-            }, (classList) =>{
-                console.log("rendering", classList)
-                return classList
-            }))
+                        (dom) => {
+                            if (lastUpdate.val !== previousUpdate) {
+                                previousUpdate = lastUpdate.val
+                                const classes = van.state(getClasses())
+
+                                return Await({
+                                    value: classes.val,
+                                    Loading: () => "🌀 Loading...",
+                                    Error: (e) => `Unable to load: ${e}`
+                                }, (classList) =>{
+                                    console.log("rendering", classList)
+                                    return classList
+                                })
+                            } else {
+                                return dom
+                            }
+                        }
+                    )
 }
 
 export const addClassModal = (initialData) => {
