@@ -52,11 +52,10 @@ export const listClasses = (renderClass = timeNameItem) => {
   return (dom) => {
     if (lastUpdate.val !== previousUpdate) {
       previousUpdate = lastUpdate.val
-      const classes = van.state(getClasses())
 
       return Await(
         {
-          value: classes.val,
+          value: getClasses(),
           Loading: () => "🌀 Loading...",
           Error: (e) => `Unable to load: ${e}`,
         },
