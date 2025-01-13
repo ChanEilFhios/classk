@@ -47,6 +47,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: var(--narrowspacing);
 }
 
 .classtimes {
@@ -57,9 +58,15 @@ button {
 .classname {
   flex-grow: 1;
   background: lightblue;
-  margin: var(--narrowspacing);
+  margin-left: var(--narrowspacing);
   padding: var(--narrowspacing);
-  border: solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timenameitem button {
+  padding: 3px;
 }
 
 .modalform.twocolumn {

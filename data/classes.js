@@ -48,7 +48,8 @@ const timeNameItem = (aClass) =>
   div(
     { class: "timenameitem" },
     div({ class: "classtimes" }, aClass.start, br(), aClass.end),
-    div({ class: "classname" }, aClass.name)
+    div({ class: "classname" }, aClass.name),
+    button("Δ")
   )
 
 export const listClasses = (classes, renderClass = timeNameItem) => {
