@@ -23,6 +23,12 @@ export const getClasses = (
     .sortBy("start")
 }
 
+export const removeClass = (classId) => {
+  dataMgr()
+    .class.delete(classId)
+    .then(() => (lastUpdate.val = Date.now()))
+}
+
 export const addClass = (newClassValues) => {
   dataMgr()
     .class.put({
@@ -133,7 +139,8 @@ export const addClassModal = (initialData = {}) => {
   }
 
   const onDelete = (e) => {
-    console.log("Asked to delete class with ID:", initialData.id)
+    removeClass(initialData.id)
+    closed.val = true
   }
 
   van.add(
