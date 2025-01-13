@@ -1,6 +1,5 @@
 import van from "vanjs-core"
 import columnhdr from "../components/columnhdr.js"
-import { Await } from "vanjs-ui"
 import pane, { paneSection } from "../components/pane.js"
 import { listClasses, addClassModal } from "../data/classes.js"
 
