@@ -23,22 +23,23 @@ export const getClasses = (
     .sortBy("start")
 }
 
-export const addClass = (newClass) => {
+export const addClass = (newClassValues) => {
   dataMgr()
     .class.put({
-      name: newClass.Name,
-      start: newClass.Start,
-      end: newClass.End,
-      building: newClass.Building,
-      room: newClass.Room,
-      teacher: newClass.Teacher,
-      active: classActive,
+      id: newClassValues.id,
+      name: newClassValues.Name,
+      start: newClassValues.Start,
+      end: newClassValues.End,
+      building: newClassValues.Building,
+      room: newClassValues.Room,
+      teacher: newClassValues.Teacher,
+      active: newClassValues.active || classActive,
       days: {
-        monday: newClass.Monday,
-        tuesday: newClass.Tuesday,
-        wednesday: newClass.Wednesday,
-        thursday: newClass.Thursday,
-        friday: newClass.Friday,
+        monday: newClassValues.Monday,
+        tuesday: newClassValues.Tuesday,
+        wednesday: newClassValues.Wednesday,
+        thursday: newClassValues.Thursday,
+        friday: newClassValues.Friday,
       },
     })
     .then(() => (lastUpdate.val = Date.now()))
@@ -98,19 +99,24 @@ export const addClassModal = (initialData = {}) => {
 
   const dayInputs = [
     formInputProperties("Monday", "classmonday", "checkbox", {
-      checked: (initialData.days && initialData.days.monday) || "on",
+      checked:
+        initialData.days && initialData.days.monday === "on" ? true : false,
     }),
     formInputProperties("Tuesday", "classtuesday", "checkbox", {
-      checked: (initialData.days && initialData.days.tuesday) || "on",
+      checked:
+        initialData.days && initialData.days.tuesday === "on" ? true : false,
     }),
     formInputProperties("Wednesday", "classwednesday", "checkbox", {
-      checked: (initialData.days && initialData.days.wednesday) || "on",
+      checked:
+        initialData.days && initialData.days.wednesday === "on" ? true : false,
     }),
     formInputProperties("Thursday", "classthursday", "checkbox", {
-      checked: (initialData.days && initialData.days.thursday) || "on",
+      checked:
+        initialData.days && initialData.days.thursday === "on" ? true : false,
     }),
     formInputProperties("Friday", "classfriday", "checkbox", {
-      checked: (initialData.days && initialData.days.friday) || "on",
+      checked:
+        initialData.days && initialData.days.friday === "on" ? true : false,
     }),
   ]
 
@@ -119,11 +125,10 @@ export const addClassModal = (initialData = {}) => {
       new FormData(document.getElementById("classform"))
     )
 
-    if (initialData.id) {
-      console.log("Updating", formData, "over", initialData)
-    } else {
-      addClass(formData)
-    }
+    formData.active = initialData.active || classActive
+    formData.id = initialData.id
+    addClass(formData)
+
     closed.val = true
   }
 
