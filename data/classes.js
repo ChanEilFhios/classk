@@ -18,28 +18,27 @@ const timeNameItem = (aClass) =>
 export const listClasses = (renderClass = timeNameItem) => {
   let previousUpdate = 0
 
-  return () =>
-    div((dom) => {
-      if (lastUpdate.val !== previousUpdate) {
-        previousUpdate = lastUpdate.val
-        const classes = van.state(getClasses())
+  return (dom) => {
+    if (lastUpdate.val !== previousUpdate) {
+      previousUpdate = lastUpdate.val
+      const classes = van.state(getClasses())
 
-        return Await(
-          {
-            value: classes.val,
-            Loading: () => "🌀 Loading...",
-            Error: (e) => `Unable to load: ${e}`,
-          },
-          (classList) => {
-            const classListElements = classList.map(renderClass)
-            console.log("rendering", classListElements)
-            return div(classListElements)
-          }
-        )
-      } else {
-        return dom
-      }
-    })
+      return Await(
+        {
+          value: classes.val,
+          Loading: () => "🌀 Loading...",
+          Error: (e) => `Unable to load: ${e}`,
+        },
+        (classList) => {
+          const classListElements = classList.map(renderClass)
+          console.log("rendering", classListElements)
+          return div({ class: "classListWrapper" }, classListElements)
+        }
+      )
+    } else {
+      return dom
+    }
+  }
 }
 
 export const addClassModal = (initialData) => {
