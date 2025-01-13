@@ -29,11 +29,8 @@ export const listClasses = (renderClass = timeNameItem) => {
           Loading: () => "🌀 Loading...",
           Error: (e) => `Unable to load: ${e}`,
         },
-        (classList) => {
-          const classListElements = classList.map(renderClass)
-          console.log("rendering", classListElements)
-          return div({ class: "classListWrapper" }, classListElements)
-        }
+        (classList) =>
+          div({ class: "classListWrapper" }, classList.map(renderClass))
       )
     } else {
       return dom
