@@ -6,13 +6,18 @@ import { Await, Modal } from "vanjs-ui"
 const { br, button, div, form, label } = van.tags
 
 export const lastUpdate = van.state(Date.now())
-export const schema = "@id,name"
+export const schema = "++id, name, active"
+
+const classActive = "yes"
 
 export const getClasses = (
-  days = ["monday", "tuesday", "wednesday", "thursday", "friday"]
+  days = ["monday", "tuesday", "wednesday", "thursday", "friday"],
+  active = classActive
 ) => {
   return dataMgr()
-    .class.filter((aClass) => {
+    .class.where("active")
+    .equals(active)
+    .filter((aClass) => {
       return days.reduce((acc, day) => aClass.days[day] === "on" || acc, false)
     })
     .sortBy("start")
@@ -27,7 +32,7 @@ export const addClass = (newClass) => {
       building: newClass.Building,
       room: newClass.Room,
       teacher: newClass.Teacher,
-      active: true,
+      active: classActive,
       days: {
         monday: newClass.Monday,
         tuesday: newClass.Tuesday,
@@ -47,24 +52,16 @@ const timeNameItem = (aClass) =>
   )
 
 export const listClasses = (classes, renderClass = timeNameItem) => {
-  let previousUpdate = 0
-
   return (dom) => {
-    if (lastUpdate.val !== previousUpdate) {
-      previousUpdate = lastUpdate.val
-
-      return Await(
-        {
-          value: classes,
-          Loading: () => "🌀 Loading...",
-          Error: (e) => `Unable to load: ${e}`,
-        },
-        (classList) =>
-          div({ class: "classListWrapper" }, classList.map(renderClass))
-      )
-    } else {
-      return dom
-    }
+    return Await(
+      {
+        value: classes,
+        Loading: () => "🌀 Loading...",
+        Error: (e) => `Unable to load: ${e}`,
+      },
+      (classList) =>
+        div({ class: "classListWrapper" }, classList.map(renderClass))
+    )
   }
 }
 
