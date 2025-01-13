@@ -27,12 +27,13 @@ export const addClass = (newClass) => {
       building: newClass.Building,
       room: newClass.Room,
       teacher: newClass.Teacher,
+      active: true,
       days: {
         monday: newClass.Monday,
         tuesday: newClass.Tuesday,
         wednesday: newClass.Wednesday,
         thursday: newClass.Thursday,
-        friday: newClass.friday,
+        friday: newClass.Friday,
       },
     })
     .then(() => (lastUpdate.val = Date.now()))
