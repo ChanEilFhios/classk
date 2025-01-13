@@ -49,7 +49,13 @@ const timeNameItem = (aClass) =>
     { class: "timenameitem" },
     div({ class: "classtimes" }, aClass.start, br(), aClass.end),
     div({ class: "classname" }, aClass.name),
-    button({ title: "Edit or delete this class" }, "Δ")
+    button(
+      {
+        title: "Edit or delete this class",
+        onclick: (e) => addClassModal(aClass),
+      },
+      "Δ"
+    )
   )
 
 export const listClasses = (classes, renderClass = timeNameItem) => {
@@ -66,30 +72,63 @@ export const listClasses = (classes, renderClass = timeNameItem) => {
   }
 }
 
-export const addClassModal = (initialData) => {
+export const addClassModal = (initialData = {}) => {
   const closed = van.state(false)
   const formInputs = [
-    formInputProperties("Name", "classname", "text", { required: true }),
-    formInputProperties("Building", "classbuilding", "text"),
-    formInputProperties("Teacher", "classteacher", "text"),
-    formInputProperties("Room", "classroom", "text"),
-    formInputProperties("Start", "classtart", "time"),
-    formInputProperties("End", "classend", "time"),
+    formInputProperties("Name", "classname", "text", {
+      required: true,
+      value: initialData.name || "",
+    }),
+    formInputProperties("Building", "classbuilding", "text", {
+      value: initialData.building || "",
+    }),
+    formInputProperties("Teacher", "classteacher", "text", {
+      value: initialData.teacher || "",
+    }),
+    formInputProperties("Room", "classroom", "text", {
+      value: initialData.room || "",
+    }),
+    formInputProperties("Start", "classtart", "time", {
+      value: initialData.start || "",
+    }),
+    formInputProperties("End", "classend", "time", {
+      value: initialData.end || "",
+    }),
   ]
 
   const dayInputs = [
-    formInputProperties("Monday", "classmonday", "checkbox"),
-    formInputProperties("Tuesday", "classtuesday", "checkbox"),
-    formInputProperties("Wednesday", "classwednesday", "checkbox"),
-    formInputProperties("Thursday", "classthursday", "checkbox"),
-    formInputProperties("Friday", "classfriday", "checkbox"),
+    formInputProperties("Monday", "classmonday", "checkbox", {
+      checked: (initialData.days && initialData.days.monday) || "on",
+    }),
+    formInputProperties("Tuesday", "classtuesday", "checkbox", {
+      checked: (initialData.days && initialData.days.tuesday) || "on",
+    }),
+    formInputProperties("Wednesday", "classwednesday", "checkbox", {
+      checked: (initialData.days && initialData.days.wednesday) || "on",
+    }),
+    formInputProperties("Thursday", "classthursday", "checkbox", {
+      checked: (initialData.days && initialData.days.thursday) || "on",
+    }),
+    formInputProperties("Friday", "classfriday", "checkbox", {
+      checked: (initialData.days && initialData.days.friday) || "on",
+    }),
   ]
 
   const onOK = (e) => {
-    const formData = new FormData(document.getElementById("classform"))
+    const formData = Object.fromEntries(
+      new FormData(document.getElementById("classform"))
+    )
 
-    addClass(Object.fromEntries(formData))
+    if (initialData.id) {
+      console.log("Updating", formData, "over", initialData)
+    } else {
+      addClass(formData)
+    }
     closed.val = true
+  }
+
+  const onDelete = (e) => {
+    console.log("Asked to delete class with ID:", initialData.id)
   }
 
   van.add(
@@ -108,6 +147,9 @@ export const addClassModal = (initialData) => {
       ),
       div(
         { class: "modalbuttons" },
+        initialData.id
+          ? button({ class: "deletebtn", onclick: onDelete }, "Delete")
+          : "",
         button({ onclick: onOK }, "Ok"),
         button({ onclick: () => (closed.val = true) }, "Cancel")
       )
