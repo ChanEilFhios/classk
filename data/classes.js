@@ -6,7 +6,38 @@ import { Await, Modal } from "vanjs-ui"
 const { br, button, div, form, label } = van.tags
 
 export const lastUpdate = van.state(Date.now())
-export const schema = "@id,name,start,end,days"
+export const schema = "@id,name"
+
+export const getClasses = (
+  // days = ["monday", "tuesday", "wednesday", "thursday", "friday"]
+  days = ["tuesday"]
+) => {
+  return dataMgr()
+    .class.filter((aClass) => {
+      return days.reduce((acc, day) => aClass.days[day] === "on" || acc, false)
+    })
+    .sortBy("start")
+}
+
+export const addClass = (newClass) => {
+  dataMgr()
+    .class.put({
+      name: newClass.Name,
+      start: newClass.Start,
+      end: newClass.End,
+      building: newClass.Building,
+      room: newClass.Room,
+      teacher: newClass.Teacher,
+      days: {
+        monday: newClass.Monday,
+        tuesday: newClass.Tuesday,
+        wednesday: newClass.Wednesday,
+        thursday: newClass.Thursday,
+        friday: newClass.friday,
+      },
+    })
+    .then(() => (lastUpdate.val = Date.now()))
+}
 
 const timeNameItem = (aClass) =>
   div(
@@ -85,28 +116,4 @@ export const addClassModal = (initialData) => {
       )
     )
   )
-}
-
-export const getClasses = () => {
-  return dataMgr().class.toArray()
-}
-
-export const addClass = (newClass) => {
-  dataMgr()
-    .class.put({
-      name: newClass.Name,
-      start: newClass.Start,
-      end: newClass.End,
-      building: newClass.Building,
-      room: newClass.Room,
-      teacher: newClass.Teacher,
-      days: {
-        monday: newClass.Monday,
-        tuesday: newClass.Tuesday,
-        wednesday: newClass.Wednesday,
-        thursday: newClass.Thursday,
-        friday: newClass.friday,
-      },
-    })
-    .then(() => (lastUpdate.val = Date.now()))
 }
