@@ -1,9 +1,9 @@
 import van from "vanjs-core"
 import columnhdr from "../components/columnhdr.js"
 import pane, { paneSection } from "../components/pane.js"
-import { listClasses, addClassModal } from "../data/classes.js"
+import { listClasses, addClassModal, getClasses } from "../data/classes.js"
 
-const { button, div, h1, span } = van.tags
+const { button, h1, span } = van.tags
 
 export const todayHdr = (position, properties = {}) =>
   columnhdr(
@@ -14,4 +14,8 @@ export const todayHdr = (position, properties = {}) =>
   )
 
 export const todayPane = (position, properties = {}) =>
-  pane(position, properties, paneSection("Classes", listClasses()))
+  pane(
+    position,
+    properties,
+    paneSection("Classes", listClasses(getClasses(["tuesday"])))
+  )

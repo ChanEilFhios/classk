@@ -9,8 +9,7 @@ export const lastUpdate = van.state(Date.now())
 export const schema = "@id,name"
 
 export const getClasses = (
-  // days = ["monday", "tuesday", "wednesday", "thursday", "friday"]
-  days = ["tuesday"]
+  days = ["monday", "tuesday", "wednesday", "thursday", "friday"]
 ) => {
   return dataMgr()
     .class.filter((aClass) => {
@@ -46,7 +45,7 @@ const timeNameItem = (aClass) =>
     div({ class: "classname" }, aClass.name)
   )
 
-export const listClasses = (renderClass = timeNameItem) => {
+export const listClasses = (classes, renderClass = timeNameItem) => {
   let previousUpdate = 0
 
   return (dom) => {
@@ -55,7 +54,7 @@ export const listClasses = (renderClass = timeNameItem) => {
 
       return Await(
         {
-          value: getClasses(),
+          value: classes,
           Loading: () => "🌀 Loading...",
           Error: (e) => `Unable to load: ${e}`,
         },
