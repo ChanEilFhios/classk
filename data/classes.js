@@ -52,13 +52,15 @@ export const schema = fieldNames
   .filter((schema) => schema)
   .join(", ")
 
-export const getClasses = (days = ["tuesday"]) => {
-  return days
-    .reduce((query, day, idx) => {
-      const next = idx === 0 ? query.where(day) : query.or(day)
-      return next.equals("true")
-    }, dataMgr().class)
-    .sortBy("start")
+export const getClasses = (days) => {
+  if (!days) return dataMgr().class.toArray()
+  else
+    return days
+      .reduce((query, day, idx) => {
+        const next = idx === 0 ? query.where(day) : query.or(day)
+        return next.equals("true")
+      }, dataMgr().class)
+      .sortBy("start")
 }
 
 export const removeClass = (classId) => {
