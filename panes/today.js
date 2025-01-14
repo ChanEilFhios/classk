@@ -28,7 +28,7 @@ export const todayPane =
       return pane(
         position,
         properties,
-        paneSection("Classes", listClasses(getClasses(["tuesday"])))
+        paneSection("Classes", listClasses(getClasses()))
       )
     } else return dom
   }

@@ -1,25 +1,62 @@
 import van from "vanjs-core"
 import { dataMgr } from "./datamgr.js"
-import formInput, { formInputProperties } from "../components/forminput.js"
+import { dataDefEntry, indexTypes } from "../utilities/data.js"
+import formInput from "../components/forminput.js"
 import { Await, Modal } from "vanjs-ui"
 
 const { br, button, div, form, label } = van.tags
 
+const fieldNames = [
+  "id",
+  "name",
+  "building",
+  "teacher",
+  "room",
+  "start",
+  "end",
+  "color",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+]
+
+const fieldDefinitions = {
+  id: dataDefEntry("id", undefined, "hidden", indexTypes.primary),
+  name: dataDefEntry("name", "Name", "text", indexTypes.index, {
+    required: true,
+  }),
+  building: dataDefEntry("building", "Building", "text"),
+  teacher: dataDefEntry("teacher", "Teacher", "text"),
+  room: dataDefEntry("room", "Room", "text"),
+  start: dataDefEntry("start", "Start", "time", indexTypes.index),
+  end: dataDefEntry("end", "End", "time"),
+  color: dataDefEntry("color", "Color", "color", undefined, { class: "span3" }),
+  monday: dataDefEntry("monday", "Monday", "checkbox", indexTypes.index),
+  tuesday: dataDefEntry("tuesday", "Tuesday", "checkbox", indexTypes.index),
+  wednesday: dataDefEntry(
+    "wednesday",
+    "Wednesday",
+    "checkbox",
+    indexTypes.index
+  ),
+  thursday: dataDefEntry("thursday", "Thursday", "checkbox", indexTypes.index),
+  friday: dataDefEntry("friday", "Friday", "checkbox", indexTypes.index),
+}
+
 export const lastUpdate = van.state(Date.now())
-export const schema = "++id, name, active"
+export const schema = fieldNames
+  .map((name) => fieldDefinitions[name].schema)
+  .filter((schema) => schema)
+  .join(", ")
 
-const classActive = "yes"
-
-export const getClasses = (
-  days = ["monday", "tuesday", "wednesday", "thursday", "friday"],
-  active = classActive
-) => {
-  return dataMgr()
-    .class.where("active")
-    .equals(active)
-    .filter((aClass) => {
-      return days.reduce((acc, day) => aClass.days[day] === "on" || acc, false)
-    })
+export const getClasses = (days = ["tuesday"]) => {
+  return days
+    .reduce((query, day, idx) => {
+      const next = idx === 0 ? query.where(day) : query.or(day)
+      return next.equals("true")
+    }, dataMgr().class)
     .sortBy("start")
 }
 
@@ -31,23 +68,7 @@ export const removeClass = (classId) => {
 
 export const addClass = (newClassValues) => {
   dataMgr()
-    .class.put({
-      id: newClassValues.id,
-      name: newClassValues.Name,
-      start: newClassValues.Start,
-      end: newClassValues.End,
-      building: newClassValues.Building,
-      room: newClassValues.Room,
-      teacher: newClassValues.Teacher,
-      active: newClassValues.active || classActive,
-      days: {
-        monday: newClassValues.Monday,
-        tuesday: newClassValues.Tuesday,
-        wednesday: newClassValues.Wednesday,
-        thursday: newClassValues.Thursday,
-        friday: newClassValues.Friday,
-      },
-    })
+    .class.put(newClassValues)
     .then(() => (lastUpdate.val = Date.now()))
 }
 
@@ -81,59 +102,20 @@ export const listClasses = (classes, renderClass = timeNameItem) => {
 
 export const addClassModal = (initialData = {}) => {
   const closed = van.state(false)
-  const formInputs = [
-    formInputProperties("Name", "classname", "text", {
-      required: true,
-      value: initialData.name || "",
-    }),
-    formInputProperties("Building", "classbuilding", "text", {
-      value: initialData.building || "",
-    }),
-    formInputProperties("Teacher", "classteacher", "text", {
-      value: initialData.teacher || "",
-    }),
-    formInputProperties("Room", "classroom", "text", {
-      value: initialData.room || "",
-    }),
-    formInputProperties("Start", "classtart", "time", {
-      value: initialData.start || "",
-    }),
-    formInputProperties("End", "classend", "time", {
-      value: initialData.end || "",
-    }),
-  ]
-
-  const dayInputs = [
-    formInputProperties("Monday", "classmonday", "checkbox", {
-      checked:
-        initialData.days && initialData.days.monday === "on" ? true : false,
-    }),
-    formInputProperties("Tuesday", "classtuesday", "checkbox", {
-      checked:
-        initialData.days && initialData.days.tuesday === "on" ? true : false,
-    }),
-    formInputProperties("Wednesday", "classwednesday", "checkbox", {
-      checked:
-        initialData.days && initialData.days.wednesday === "on" ? true : false,
-    }),
-    formInputProperties("Thursday", "classthursday", "checkbox", {
-      checked:
-        initialData.days && initialData.days.thursday === "on" ? true : false,
-    }),
-    formInputProperties("Friday", "classfriday", "checkbox", {
-      checked:
-        initialData.days && initialData.days.friday === "on" ? true : false,
-    }),
-  ]
 
   const onOK = (e) => {
     const formData = Object.fromEntries(
       new FormData(document.getElementById("classform"))
     )
-
-    formData.active = initialData.active || classActive
     formData.id = initialData.id
-    addClass(formData)
+
+    const classObj = fieldNames.reduce((acc, field) => {
+      const fieldDefinition = fieldDefinitions[field]
+      acc[field] = fieldDefinition.fromFormData(formData[field])
+      return acc
+    }, {})
+
+    addClass(classObj)
 
     closed.val = true
   }
@@ -149,12 +131,24 @@ export const addClassModal = (initialData = {}) => {
       { closed },
       form(
         { id: "classform", class: "twocolumn modalform" },
-        ...formInputs.map((properties) => formInput(properties)),
+        ...["name", "building", "teacher", "room", "start", "end", "color"].map(
+          (field) =>
+            formInput(
+              fieldDefinitions[field],
+              fieldDefinitions[field].toFormInput(initialData[field])
+            )
+        ),
 
         label("Days"),
         div(
           { class: "span3" },
-          ...dayInputs.map((properties) => formInput(properties).reverse())
+          ...["monday", "tuesday", "wednesday", "thursday", "friday"].map(
+            (field) =>
+              formInput(
+                fieldDefinitions[field],
+                fieldDefinitions[field].toFormInput(initialData[field])
+              ).reverse()
+          )
         )
       ),
       div(

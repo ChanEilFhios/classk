@@ -2,14 +2,21 @@ import van from "vanjs-core"
 
 const { input, label } = van.tags
 
-export const formInputProperties = (name, id, type, others) => ({
-  name,
-  id,
-  type,
-  ...others,
-})
+export default (dataDefinition, initialValue) => {
+  const returnElements = []
+  const id = Math.random()
 
-export default (properties) => [
-  label({ for: properties.id }, properties.name),
-  input(properties),
-]
+  if (dataDefinition.type !== "hidden")
+    returnElements.push(label({ for: id }, dataDefinition.label))
+  returnElements.push(
+    input({
+      ...dataDefinition.properties,
+      id,
+      name: dataDefinition.name,
+      type: dataDefinition.type,
+      ...initialValue,
+    })
+  )
+
+  return returnElements
+}
