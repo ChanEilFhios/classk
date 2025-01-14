@@ -7,6 +7,7 @@ import {
   getClasses,
   lastUpdate,
 } from "../data/classes.js"
+import { weekDayNames } from "../utilities/text.js"
 
 const { button, h1, span } = van.tags
 
@@ -28,7 +29,10 @@ export const todayPane =
       return pane(
         position,
         properties,
-        paneSection("Classes", listClasses(getClasses()))
+        paneSection(
+          "Classes",
+          listClasses(getClasses([weekDayNames[new Date().getDay()]]))
+        )
       )
     } else return dom
   }
