@@ -3,6 +3,7 @@ import { dataMgr } from "./datamgr.js"
 import { dataDefEntry, indexTypes } from "../utilities/data.js"
 import formInput from "../components/forminput.js"
 import { Await, Modal } from "vanjs-ui"
+import { getContrastColor } from "../utilities/display.js"
 
 const { br, button, div, form, label } = van.tags
 
@@ -77,7 +78,12 @@ const timeNameItem = (aClass) =>
     { class: "timenameitem" },
     div({ class: "classtimes" }, aClass.start, br(), aClass.end),
     div(
-      { class: "classname", style: `background-color: ${aClass.color}` },
+      {
+        class: "classname",
+        style: `background-color: ${aClass.color}; color: ${getContrastColor(
+          aClass.color
+        )}`,
+      },
       aClass.name
     ),
     button(
