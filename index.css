@@ -113,8 +113,10 @@ input[type="checkbox"] + label {
   border-left: solid var(--border-color) var(--narrow-border-width);
 }
 
-.verticalseparation {
-  border-bottom: solid var(--border-color) var(--narrow-border-width);
+.secondheaderleft.pane,
+.secondheadercenter.pane,
+.secondheaderright.pane {
+  border-top: solid var(--border-color) var(--narrow-border-width);
 }
 
 .vnav {

@@ -16,10 +16,7 @@ van.add(
   examHdr("headerright"),
   todayPane("maintopleft"),
   div({ class: "maincenter columnborder scrollable" }, "maincenter"),
-  div(
-    { class: "maintopright columnborder scrollable verticalseparation" },
-    "maintopright"
-  ),
+  div({ class: "maintopright columnborder scrollable" }, "maintopright"),
   tomorrowHdr("secondheaderleft"),
   tomorrowPane("mainbottomleft"),
   todoHdr("secondheaderright"),
