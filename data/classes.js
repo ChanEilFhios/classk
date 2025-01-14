@@ -2,7 +2,7 @@ import van from "vanjs-core"
 import { dataMgr } from "./datamgr.js"
 import { dataDefEntry, indexTypes } from "../utilities/data.js"
 import formInput from "../components/forminput.js"
-import { Await, Modal } from "vanjs-ui"
+import { Await, Modal, Tooltip } from "vanjs-ui"
 import { getContrastColor } from "../utilities/display.js"
 
 const { br, button, div, form, label } = van.tags
@@ -75,18 +75,32 @@ export const addClass = (newClassValues) => {
     .then(() => (lastUpdate.val = Date.now()))
 }
 
-const timeNameItem = (aClass) =>
-  div(
+const timeNameItem = (aClass) => {
+  const showTooltip = van.state(false)
+
+  return div(
     { class: "timenameitem" },
     div({ class: "classtimes" }, aClass.start, br(), aClass.end),
     div(
       {
         class: "classname",
-        style: `background-color: ${aClass.color}; color: ${getContrastColor(
-          aClass.color
-        )}`,
+        onmouseenter: () => (showTooltip.val = true),
+        onmouseleave: () => (showTooltip.val = false),
+        style: `
+        position: relative;
+        background-color: ${aClass.color};
+        color: ${getContrastColor(aClass.color)}`,
       },
-      aClass.name
+      aClass.name,
+      Tooltip({
+        text: `${aClass.teacher} - ${aClass.building} Room:${aClass.room}
+        [${["monday", "tuesday", "wednesday", "thursday", "friday"]
+          .filter((day) => aClass[day] === "true")
+          .map((day) => (day === "thursday" ? day.slice(0, 2) : day.charAt(0)))
+          .map((abbrev) => abbrev.toUpperCase())
+          .join(", ")}]`,
+        show: showTooltip,
+      })
     ),
     button(
       {
@@ -96,6 +110,7 @@ const timeNameItem = (aClass) =>
       "Δ"
     )
   )
+}
 
 export const listClasses = (classes, renderClass = timeNameItem) => {
   return (dom) => {
